@@ -71,7 +71,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     commands.registerCommand(Commands.setOnlineSite, async () => {
       const onlineSite = workspaceConfiguration().get('onlineSite');
       // 没有找到 showQuickPick 接口设置选中项的配置, 所以这里排序将当前设置置顶
-      const items = [{ label: '起点' }, { label: '笔趣阁' }]
+      const items = [{ label: '起点' }, { label: '笔趣阁' }, { label: 'TXT下载网' }]
         .map((e) => ({ ...e, description: e.label === onlineSite ? '当前设置' : '' }))
         .sort((e) => (e.label === onlineSite ? -1 : 0));
       const result = await window.showQuickPick(items, {
