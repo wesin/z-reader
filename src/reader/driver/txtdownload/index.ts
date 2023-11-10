@@ -71,8 +71,21 @@ class ReaderDriver implements ReaderDriverImplements {
     try {
       const res = await request.send(pathStr);
       const $ = cheerio.load(res.body);
+
       const html = $('#content').html();
       result = html ? html : '';
+      const has_next = $('center');
+      if (has_next.length > 0) {
+        let item;
+        $('.section-opt.m-bottom-opt a').each(function (i, elem) {
+          if (i === 2) {
+            item = elem;
+          }
+        });
+
+        const path = $(item).attr().href;
+        result += await this.getContent(DOMAIN + path);
+      }
     } catch (error) {
       console.warn(error);
     }
