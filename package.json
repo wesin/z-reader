@@ -92,7 +92,7 @@
       "activitybar": [
         {
           "id": "treeView",
-          "title": "小说",
+          "title": "doc",
           "icon": "static/images/icon.svg"
         }
       ]
@@ -186,11 +186,12 @@
         },
         "z-reader.onlineSite": {
           "type": "string",
-          "default": "起点",
+          "default": "uu看书",
           "enum": [
             "起点",
             "笔趣阁",
-            "TXT下载网"
+            "TXT下载网",
+            "uu看书"
           ],
           "description": "在线搜索来源网站"
         },

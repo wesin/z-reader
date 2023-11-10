@@ -137,6 +137,8 @@ class ReaderDriver {
         return './driver/biquge';
       case 'TXT下载网':
         return './driver/txtdownload';
+      case 'uu看书':
+        return './driver/uu';
       default:
         return './driver/qidian';
     }
