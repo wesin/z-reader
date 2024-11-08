@@ -11,7 +11,7 @@
   ],
   "publisher": "wesin",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "icon": "static/images/icon-green.png",
   "qna": "https://github.com/aooiuu/z-reader.git/issues",
   "repository": {
@@ -264,12 +264,13 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "epub": "^1.2.0",
+    "epub": "^1.2.1",
     "got": "^11.8.5",
     "hpagent": "^0.1.2",
     "iconv-lite": "^0.5.0",
     "open": "^7.0.0",
-    "tough-cookie": "^4.0.0",
-    "tslib": "^2.3.0"
+    "tough-cookie": "^5.0.0",
+    "tslib": "^2.3.0",
+    "wesin-reader": "file:"
   }
 }

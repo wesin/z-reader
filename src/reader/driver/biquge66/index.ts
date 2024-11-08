@@ -3,7 +3,7 @@ import request from '../../../utils/request';
 import { TreeNode, defaultTreeNode } from '../../../explorer/TreeNode';
 import { ReaderDriver as ReaderDriverImplements } from '../../../@types';
 
-const DOMAIN = 'http://www.biquge66.net';
+const DOMAIN = 'https://www.22shuqu.com';
 const TYPE = '.biquge66';
 class ReaderDriver implements ReaderDriverImplements {
   public hasChapter() {
@@ -12,29 +12,39 @@ class ReaderDriver implements ReaderDriverImplements {
 
   public async search(keyword: string): Promise<TreeNode[]> {
     const result: TreeNode[] = [];
-    try {
-      const res = await request.send(DOMAIN + '/search/?searchkey=' + encodeURI(keyword));
-      const $ = cheerio.load(res.body);
-      $('.hotcontent .item').each(function (i: number, elem: any) {
-        const title = $(elem).find('.image a').attr('title');
-        const author = $(elem).find('.btm a').attr('title');
-        const path = $(elem).find('.image a').attr('href');
-        if (title && author) {
-          result.push(
-            new TreeNode(
-              Object.assign({}, defaultTreeNode, {
-                type: TYPE,
-                name: `${title} - ${author}`,
-                isDirectory: true,
-                path: DOMAIN + path
-              })
-            )
-          );
-        }
-      });
-    } catch (error) {
-      console.warn(error);
-    }
+    result.push(
+      new TreeNode(
+        Object.assign({}, defaultTreeNode, {
+          type: TYPE,
+          name: `太平令`,
+          isDirectory: true,
+          path: DOMAIN + '/b/1008/1008660/'
+        })
+      )
+    );
+    // try {
+    //   const res = await request.send(DOMAIN + '/search/?searchkey=' + encodeURI(keyword));
+    //   const $ = cheerio.load(res.body);
+    //   $('.hotcontent .item').each(function (i: number, elem: any) {
+    //     const title = $(elem).find('.image a').attr('title');
+    //     const author = $(elem).find('.btm a').attr('title');
+    //     const path = $(elem).find('.image a').attr('href');
+    //     if (title && author) {
+    //       result.push(
+    //         new TreeNode(
+    //           Object.assign({}, defaultTreeNode, {
+    //             type: TYPE,
+    //             name: `${title} - ${author}`,
+    //             isDirectory: true,
+    //             path: DOMAIN + path
+    //           })
+    //         )
+    //       );
+    //     }
+    //   });
+    // } catch (error) {
+    //   console.warn(error);
+    // }
     return result;
   }
 
@@ -44,9 +54,10 @@ class ReaderDriver implements ReaderDriverImplements {
       console.log(pathStr);
       const res = await request.send(pathStr);
       const $ = cheerio.load(res.body);
-      $('#list')
+      // class . id#
+      $('.section-box')
         .eq(1)
-        .find('div li')
+        .find('ul li')
         .each(function (i: number, elem: any) {
           const name = $(elem).find('a').text();
           const path = $(elem).find('a').attr().href;
@@ -72,7 +83,7 @@ class ReaderDriver implements ReaderDriverImplements {
     try {
       const res = await request.send(pathStr);
       const $ = cheerio.load(res.body);
-      const html = $('#booktxt').html();
+      const html = $('.content').html();
       result = html ? html : '';
       const next = $('#next_url').eq(1);
       const has_next = next.text().trim() === '下一页';
